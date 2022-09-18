@@ -93,6 +93,13 @@ main {
     border-radius: 10%;
 }
 /* button ids */
+.button-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
 #hit {
     color: rgba(250, 242, 238, 0.886);
     height: 60px;
@@ -104,15 +111,24 @@ main {
     font-family: 'Courier New', Courier, monospace;
 }
 
+#hit:hover {
+    background-color: rgba(250, 242, 238, 0.886);
+    color: rgb(21, 20, 20);
+}
+
 #stand { 
     color: rgba(250, 242, 238, 0.886);
     height: 60px;
     width: 260px;
     margin-bottom: 80px;
-    margin-right: 120px;
     border: 1px solid;
     font-size: 20px;
     font-family: 'Courier New', Courier, monospace;
+}
+
+#stand:hover {
+    background-color: rgba(250, 242, 238, 0.886);
+    color: rgb(21, 20, 20);
 }
 
 #reset {
@@ -123,4 +139,9 @@ main {
     font-size: 20px;
     font-family: 'Courier New', Courier, monospace;
     margin-right: 30px;
+}
+
+#reset:hover {
+    background-color: rgba(250, 242, 238, 0.886);
+    color: rgb(21, 20, 20);
 }
