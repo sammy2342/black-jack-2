@@ -7,6 +7,7 @@
 nav { 
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     align-content: center;
     height: 100px;
@@ -19,6 +20,7 @@ nav {
     align-items: center;
     color: rgba(250, 242, 238, 0.886);
     margin-left: 30px;
+    font-style: italic;
 }
 
 header {
@@ -75,7 +77,6 @@ section {
     margin-top: 20px;
 }
 
-
 main {
     display: flex;
     flex-wrap: wrap;
@@ -83,13 +84,43 @@ main {
     margin: auto;
 }
 
-
-
 .card-container { 
     border: 1px dashed rgb(214, 214, 214);
     height: 210px;
     width: 160px;
     margin-top: 10px;
-    margin-left: 35px;
+    margin-left: 55px;
     border-radius: 10%;
+}
+/* button ids */
+#hit {
+    color: rgba(250, 242, 238, 0.886);
+    height: 60px;
+    width: 260px;
+    margin-bottom: 80px;
+    margin-right: 120px;
+    border: 1px solid;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#stand { 
+    color: rgba(250, 242, 238, 0.886);
+    height: 60px;
+    width: 260px;
+    margin-bottom: 80px;
+    margin-right: 120px;
+    border: 1px solid;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#reset {
+    color: rgba(250, 242, 238, 0.886);
+    height: 60px;
+    width: 260px;
+    border: 1px solid;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    margin-right: 30px;
 }
