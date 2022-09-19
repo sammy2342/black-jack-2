@@ -108,7 +108,7 @@ main {
 }
 
 .card-container { 
-    border: 1px dashed rgb(214, 214, 214);
+    /* border: 1px dashed rgb(214, 214, 214); */
     height: 210px;
     width: 160px;
     margin-top: 10px;
@@ -168,3 +168,5 @@ main {
     background-color: rgba(250, 242, 238, 0.886);
     color: rgb(21, 20, 20);
 }
+
+/* button id end */
