@@ -79,6 +79,7 @@ function randomizeDeck() {
     }
     
     returnLastElementInArray()
+    renderCardOnPage()
     // console.log(newDeck)
     // console.log(deckOfCards)
 }
@@ -89,15 +90,15 @@ function returnLastElementInArray() {
     return console.log(`card ${lastElementInArray[0].symbol}${lastElementInArray[0].value} xlarge`)
 }
 
+
 function renderCardOnPage() {
     //first thing we wanna create a div 
     // and then we want to give it a class name of returnLastElementInArray whic is (card cardnumber xlarge)
     let createDiv = document.createElement('div') 
-    console.log(createDiv)
-    document.querySelector('.card-container').appendChild(createDiv)
+    // console.log(createDiv)
+    let addDiv = document.querySelector('.card-container').appendChild(createDiv)
+    addDiv.classList.add('card', `${lastElementInArray[0].symbol}${lastElementInArray[0].value}`, 'xlarge')
 }
-
-
 
 
 
