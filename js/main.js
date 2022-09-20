@@ -96,7 +96,7 @@ function renderCardOnPage() {
     // and then we want to give it a class name of returnLastElementInArray whic is (card cardnumber xlarge)
     let createDiv = document.createElement('div') 
     // console.log(createDiv)
-    let addDiv = document.querySelector('.card-container').appendChild(createDiv)
+    let addDiv = document.querySelector('main').appendChild(createDiv)
     addDiv.classList.add('card', `${lastElementInArray[0].symbol}${lastElementInArray[0].value}`, 'xlarge')
 }
 
