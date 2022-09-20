@@ -10,7 +10,11 @@ let winner
 let valueOfUniqueCards
 let newDeck = []
 let lastElementInArray
+let currentValue
+let valueOfTheCard
 
+//asign this late when you do the functions
+let dealerSum
 
 
 
@@ -35,7 +39,7 @@ resetBtnEl = document.getElementById('reset')
 
 hitBtnEl.addEventListener('click', randomizeDeck)
 
-
+standBtnEl.addEventListener('click', playerStand)
 
 
 
@@ -84,6 +88,7 @@ function randomizeDeck() {
     
     returnLastElementInArray()
     renderCardOnPage()
+    renderDealerCodeOnPage()
 }
 
 // we want to add this information in a class so it displays on the page 
@@ -102,39 +107,78 @@ function renderCardOnPage() {
     // console.log(createDiv)
     let addDiv = document.querySelector('main').appendChild(createDiv)
     addDiv.classList.add('card', `${lastElementInArray[0].symbol}${lastElementInArray[0].value}`, 'xlarge')
-    // addScoreForPlayer()
     displayPlayerScore()
+    // addScoreForPlayer()
+    
 }
 
 function valueOfCards() {
     // console.log(lastElementInArray, 'is this working')
-    let valueOfTheCard = lastElementInArray[0].value
+    valueOfTheCard = lastElementInArray[0].value
     if(valueOfTheCard === 'J' || valueOfTheCard === 'Q' || valueOfTheCard === 'K') {
         valueOfTheCard = 10
         valueOfTheCard = parseInt(valueOfTheCard)
     } 
     if(valueOfTheCard === 'A') {
         valueOfTheCard = 11 
+        checkAce()
     }
-    let currentValue = parseInt(valueOfTheCard)
+    currentValue = parseInt(valueOfTheCard)
     // console.log(currentValue)
+    
     return currentValue
     // console.log(currentValue)
 }
+
 
 let playerSum = 0
 function addScoreForPlayer() {
     let valueOfPlayerCard = valueOfCards()
     playerSum = playerSum + valueOfPlayerCard
     return playerSum
+    // checkAce()
 }
 
 function displayPlayerScore() {
     let sumOfPlayerScore = addScoreForPlayer()
     playerScoreMessageEl.innerHTML = sumOfPlayerScore
+    if(sumOfPlayerScore > 21){
+        // alert('you went bust')
+    } else if(sumOfPlayerScore === 21) {
+        // alert('You won')
+    }
 }
 
+// still have to figure this out 
+function checkAce() {
+    // valueOfCards()
+    // addScoreForPlayer()
 
+    // console.log(playerSum)
+    // console.log(currentValue)
+    // console.log(valueOfTheCard)
+    if(valueOfTheCard === 11 && playerSum <= 10) {
+        valueOfTheCard = 11
+    } else if(valueOfTheCard === 11 && playerSum >= 11) {
+        valueOfTheCard = 1
+    }
+}
+
+function playerStand() { 
+    if(playerSum > dealerSum) {
+        alert('you won')
+    } else if(playerSum === dealerSum) {
+        alert('Tied')
+    } else if(dealerSum > playerSum) {
+        alert('you Lost')
+    }
+}
+
+function renderDealerCodeOnPage() {
+    createDealerDiv = document.createElement('div') 
+    addDealerDiv = document.querySelector('.main2').appendChild(createDealerDiv)
+    addDealerDiv.classList.add('card', `${lastElementInArray[0].symbol}${lastElementInArray[0].value}`, 'xlarge')
+}
 
 
 init()
