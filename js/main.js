@@ -14,6 +14,7 @@ let lastElementInArray
 
 
 
+
 /*----- cached element references -----*/ 
 hitBtnEl = document.getElementById('hit')
 
@@ -49,6 +50,7 @@ function init() {
     makeDeck()
     // console.log(deckOfCards)
     randomizeDeck()
+    
 }
 
 // Intilize deck ***********************************************************************************
@@ -100,6 +102,8 @@ function renderCardOnPage() {
     // console.log(createDiv)
     let addDiv = document.querySelector('main').appendChild(createDiv)
     addDiv.classList.add('card', `${lastElementInArray[0].symbol}${lastElementInArray[0].value}`, 'xlarge')
+    // addScoreForPlayer()
+    displayPlayerScore()
 }
 
 function valueOfCards() {
@@ -107,11 +111,27 @@ function valueOfCards() {
     let valueOfTheCard = lastElementInArray[0].value
     if(valueOfTheCard === 'J' || valueOfTheCard === 'Q' || valueOfTheCard === 'K') {
         valueOfTheCard = 10
+        valueOfTheCard = parseInt(valueOfTheCard)
     } 
     if(valueOfTheCard === 'A') {
         valueOfTheCard = 11 
     }
-    console.log(parseInt(valueOfTheCard))
+    let currentValue = parseInt(valueOfTheCard)
+    // console.log(currentValue)
+    return currentValue
+    // console.log(currentValue)
+}
+
+let playerSum = 0
+function addScoreForPlayer() {
+    let valueOfPlayerCard = valueOfCards()
+    playerSum = playerSum + valueOfPlayerCard
+    return playerSum
+}
+
+function displayPlayerScore() {
+    let sumOfPlayerScore = addScoreForPlayer()
+    playerScoreMessageEl.innerHTML = sumOfPlayerScore
 }
 
 
