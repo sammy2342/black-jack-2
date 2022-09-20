@@ -13,6 +13,7 @@ let lastElementInArray
 
 
 
+
 /*----- cached element references -----*/ 
 hitBtnEl = document.getElementById('hit')
 
@@ -50,6 +51,7 @@ function init() {
     randomizeDeck()
 }
 
+// Intilize deck ***********************************************************************************
 function makeDeck() {
     for(let i = 0; i < arrSymbol.length; i++) {
         for(let j = 0; j < arrNum.length; j++) {
@@ -80,16 +82,16 @@ function randomizeDeck() {
     
     returnLastElementInArray()
     renderCardOnPage()
-    // console.log(newDeck)
-    // console.log(deckOfCards)
 }
 
 // we want to add this information in a class so it displays on the page 
 function returnLastElementInArray() {
     lastElementInArray = newDeck.pop()
-    return console.log(`card ${lastElementInArray[0].symbol}${lastElementInArray[0].value} xlarge`)
+    console.log(`card ${lastElementInArray[0].symbol}${lastElementInArray[0].value} xlarge`)
+    valueOfCards()
 }
 
+// render *******************************************************************************
 
 function renderCardOnPage() {
     //first thing we wanna create a div 
@@ -100,7 +102,17 @@ function renderCardOnPage() {
     addDiv.classList.add('card', `${lastElementInArray[0].symbol}${lastElementInArray[0].value}`, 'xlarge')
 }
 
-
+function valueOfCards() {
+    // console.log(lastElementInArray, 'is this working')
+    let valueOfTheCard = lastElementInArray[0].value
+    if(valueOfTheCard === 'J' || valueOfTheCard === 'Q' || valueOfTheCard === 'K') {
+        valueOfTheCard = 10
+    } 
+    if(valueOfTheCard === 'A') {
+        valueOfTheCard = 11 
+    }
+    console.log(parseInt(valueOfTheCard))
+}
 
 
 
