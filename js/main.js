@@ -9,6 +9,7 @@ let deckOfCards = []
 let winner 
 let valueOfUniqueCards
 let newDeck = []
+let lastElementInArray
 
 
 
@@ -54,6 +55,7 @@ function makeDeck() {
         for(let j = 0; j < arrNum.length; j++) {
             let cardValue = {value: arrNum[j], symbol: arrSymbol[i]}
             deckOfCards.push(cardValue)
+            // Not sure if the if statement works
             if(arrNum[j] === 'K' && arrNum[j] === 'Q' && arrNum[j] === 'J') {
                 valueOfUniqueCards = 10
             }
@@ -76,21 +78,27 @@ function randomizeDeck() {
         return 
     }
     
-    renderHitTwoCards()
+    returnLastElementInArray()
     // console.log(newDeck)
     // console.log(deckOfCards)
 }
 
-function renderHitTwoCards() { 
-    for(let i = 0; i < newDeck.length; i++) {
-        for(let j = 0; j < newDeck.length; j++) {
-        let cardValue = `${newDeck[i][j].symbol}${newDeck[i][j].value}`
-        console.log(cardValue)
-        console.log(newDeck)
-        }
-    }
-    
+// we want to add this information in a class so it displays on the page 
+function returnLastElementInArray() {
+    lastElementInArray = newDeck.pop()
+    return console.log(`card ${lastElementInArray[0].symbol}${lastElementInArray[0].value} xlarge`)
 }
+
+function renderCardOnPage() {
+    //first thing we wanna create a div 
+    // and then we want to give it a class name of returnLastElementInArray whic is (card cardnumber xlarge)
+    let createDiv = document.createElement('div') 
+    console.log(createDiv)
+    document.querySelector('.card-container').appendChild(createDiv)
+}
+
+
+
 
 
 
