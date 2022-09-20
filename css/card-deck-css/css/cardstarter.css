@@ -31,7 +31,9 @@
   .card.large {
     font-size: 26px; }
   .card.xlarge {
-    font-size: 37px; }
+    font-size: 37px; 
+    margin-left: 50px;
+  }
   .card.no-border {
     border: 0; }
   .card.shadow {
