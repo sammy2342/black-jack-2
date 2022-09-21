@@ -19,6 +19,7 @@ let cardValue
 let firstElementInArray
 let dealerDeckOfCards = []
 let dealerLastCardInArrayyy = []
+let valueOfDealerCard
 
 
 
@@ -208,7 +209,19 @@ function renderDealerCodeOnPage() {
     // console.log(addDealerDiv)
 }
 
-
+function dealerCardValue() {
+    valueOfDealerCard = dealerLastCardInArrayyy[0].value
+    // console.log(isNaN(valueOfDealerCard))
+    if(isNaN(valueOfDealerCard)) { 
+        if(valueOfDealerCard === 'A') {
+            return 11
+        } else {
+            return 10
+        }
+        
+    }
+    return parseInt(valueOfDealerCard) 
+}
 
 function init() {
     makeDeck()
