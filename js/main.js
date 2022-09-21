@@ -6,22 +6,9 @@ const arrSymbol = ['h', 's', 'c', 'd']
 
 /*----- app's state (variables) -----*/ 
 let deckOfCards = []
-let winner 
-let valueOfUniqueCards
 let newDeck = []
-let lastElementInArray
-let currentValue
-let valueOfTheCard
-let newElementInArray
-//asign this late when you do the functions
-let dealerSum
-let cardValue
-let firstElementInArray
-let dealerDeckOfCards = []
-let dealerLastCardInArrayyy = []
-let valueOfDealerCard
-let newValueOfDealerCard
-let sumOfDealerScore
+let playerHand = []
+let dealerHand = []
 
 
 
@@ -43,9 +30,11 @@ resetBtnEl = document.getElementById('reset')
 
 /*----- event listeners -----*/ 
 
-hitBtnEl.addEventListener('click', randomizeDeck)
+hitBtnEl.addEventListener('click', playerHitBtn)
 
 standBtnEl.addEventListener('click', playerStand)
+
+resetBtnEl.addEventListener('click', resetBtn)
 
 
 
@@ -85,38 +74,59 @@ function randomizeDeck() {
     // first thing we are getting a random index 
     // then we store that random index in removecard 
     // then we remove that index from deck of cards and we add it to the new deck
-    let randomCard = Math.floor(Math.random() * deckOfCards.length)
-    let removeCard = deckOfCards.splice(randomCard, 1)
-    if(newDeck.length < 52) {
-        newDeck.push(removeCard)
-    } else {
-        return 
+    while(deckOfCards.length){
+        let randomCard = Math.floor(Math.random() * deckOfCards.length)
+        let removeCard = deckOfCards.splice(randomCard, 1)
+        newDeck.push(removeCard[0])
     }
-    
-    returnLastElementInArray()
-    renderCardOnPage()
-    dealerRandomDeckOfCards()
-    dealerLastCardInArray()
 }
 
 // we want to add this information in a class so it displays on the page 
-function returnLastElementInArray() {
-    lastElementInArray = newDeck.pop()
-    console.log(`card ${lastElementInArray[0].symbol}${lastElementInArray[0].value} xlarge`)
-    valueOfCards()
+function dealCards() {
+    for(let i = 0; i < 2; i++) {
+        playerHand.push(newDeck.pop())
+    }
+    for(let i = 0; i < 2; i++) {
+        dealerHand.push(newDeck.pop())
+    }
 }
 
 // render *******************************************************************************
 
-function renderCardOnPage() {
-    //first thing we wanna create a div 
-    // and then we want to give it a class name of returnLastElementInArray whic is (card cardnumber xlarge)
-    let createDiv = document.createElement('div') 
-    // console.log(createDiv)
-    let addDiv = document.querySelector('main').appendChild(createDiv)
-    addDiv.classList.add('card', `${lastElementInArray[0].symbol}${lastElementInArray[0].value}`, 'xlarge')
-    displayPlayerScore()
+function render() {
+    renderPlayerHand()
+    renderDealerHand()
 }
+
+function renderPlayerHand() {
+    // first im going to loop through the player hand 
+    // forEach card in th player hand create a div and give it the proper classes 
+    // after creating the div append them to the dom 
+    playerHand.forEach(card => {
+        console.log(card)
+        let newPlayerHandDiv = document.createElement('div')
+        newPlayerHandDiv.classList.add(`card`,`${card.symbol}${card.value}`,'xlarge')
+        document.querySelector('main').appendChild(newPlayerHandDiv)
+    })
+}
+
+function renderDealerHand() {
+    dealerHand.forEach(card => {
+        console.log(card)
+        let newDealerHandDiv = document.createElement('div')
+        newDealerHandDiv.classList.add(`card`,`${card.symbol}${card.value}`,'xlarge')
+        document.querySelector('.main2').appendChild(newDealerHandDiv)
+    })
+}
+
+function playerHitBtn() {
+    let newCard = newDeck.pop()
+    let newPlayerCardDiv = document.createElement('div')
+    newPlayerCardDiv.classList.add(`card`, `${newCard.symbol}${newCard.value}`, `xlarge`)
+    document.querySelector('main').appendChild(newPlayerCardDiv)
+}
+
+
 
 function valueOfCards() {
     // console.log(lastElementInArray, 'is this working')
@@ -148,6 +158,7 @@ function addScoreForPlayer() {
 function displayPlayerScore() {
     let sumOfPlayerScore = addScoreForPlayer()
     playerScoreMessageEl.innerHTML = sumOfPlayerScore
+    // playerStand()
     if(sumOfPlayerScore > 21){
         alert('you went bust')
     } else if(sumOfPlayerScore === 21) {
@@ -212,6 +223,13 @@ function renderDealerCodeOnPage() {
     dealerScore()
 }
 
+function test() {
+    while(dealerSum < 17) {
+        renderDealerCodeOnPage()
+    }
+}
+
+
 function dealerCardValue() {
     valueOfDealerCard = dealerLastCardInArrayyy[0].value
     // console.log(isNaN(valueOfDealerCard))
@@ -238,27 +256,28 @@ function addScoreForDealer() {
 function dealerScore() { 
     addScoreForDealer()
     dealerScoreMessageEl.innerHTML = dealerSum
+    // checkWinner()
 }
 
 function checkWinner() { 
     if(dealerSum > playerSum) {
-        alert('you lost')
+        alert('you lost dealer won')
     } else if(playerSum === dealerSum) {
         alert('tie')
     } else if(playerSum > dealerSum) {
-        alert('you won')
+        alert('you won ;;')
     }
+}
+
+function resetBtn() {
 }
 
 function init() {
     makeDeck()
-    // console.log(deckOfCards)
     randomizeDeck()
-    dealerRandomDeckOfCards()
-    // addScoreForDealer()
-    // dealerScore()
-
+    dealCards()
+    render()
 }
-
 init()
+
 
