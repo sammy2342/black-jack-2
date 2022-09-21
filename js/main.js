@@ -121,10 +121,26 @@ function renderDealerHand() {
 
 function playerHitBtn() {
     let newCard = newDeck.pop()
+    playerHand.push(newCard)
     let newPlayerCardDiv = document.createElement('div')
     newPlayerCardDiv.classList.add(`card`, `${newCard.symbol}${newCard.value}`, `xlarge`)
     document.querySelector('main').appendChild(newPlayerCardDiv)
 }
+
+let playerScore = 0
+function calculatePlayerScore() {
+    for(let i = 0; i < playerHand.length; i++) {
+        if(playerHand[i].value === 'Q' || playerHand[i].value === 'J' || playerHand[i].value === 'K') {
+            playerHand[i].value = '10'
+        }else if(playerHand[i].value === 'A') {
+            playerHand[i].value === '11'
+        }
+        return playerScore += parseInt(playerHand[i].value)
+        
+    }
+    console.log(playerScore)
+}
+
 
 
 
