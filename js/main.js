@@ -12,10 +12,13 @@ let newDeck = []
 let lastElementInArray
 let currentValue
 let valueOfTheCard
-
+let newElementInArray
 //asign this late when you do the functions
 let dealerSum
-
+let cardValue
+let firstElementInArray
+let dealerDeckOfCards = []
+let dealerLastCardInArrayyy = []
 
 
 
@@ -50,18 +53,19 @@ standBtnEl.addEventListener('click', playerStand)
 // and then inside of the first loop we loop another for every symbol we loop through the numbers
 // and then we put it inside an object with value and symbol 
 // and then we set deck of card to empty array and we push it inside of it
-function init() {
-    makeDeck()
-    // console.log(deckOfCards)
-    randomizeDeck()
-    
-}
+// function init() {
+//     makeDeck()
+//     // console.log(deckOfCards)
+//     randomizeDeck()
+//     dealerRandomDeckOfCards()
+//     renderDealerCodeOnPage()
+// }
 
 // Intilize deck ***********************************************************************************
 function makeDeck() {
     for(let i = 0; i < arrSymbol.length; i++) {
         for(let j = 0; j < arrNum.length; j++) {
-            let cardValue = {value: arrNum[j], symbol: arrSymbol[i]}
+            cardValue = {value: arrNum[j], symbol: arrSymbol[i]}
             deckOfCards.push(cardValue)
             // Not sure if the if statement works
             if(arrNum[j] === 'K' && arrNum[j] === 'Q' && arrNum[j] === 'J') {
@@ -88,7 +92,8 @@ function randomizeDeck() {
     
     returnLastElementInArray()
     renderCardOnPage()
-    renderDealerCodeOnPage()
+    dealerRandomDeckOfCards()
+    dealerLastCardInArray()
 }
 
 // we want to add this information in a class so it displays on the page 
@@ -108,8 +113,6 @@ function renderCardOnPage() {
     let addDiv = document.querySelector('main').appendChild(createDiv)
     addDiv.classList.add('card', `${lastElementInArray[0].symbol}${lastElementInArray[0].value}`, 'xlarge')
     displayPlayerScore()
-    // addScoreForPlayer()
-    
 }
 
 function valueOfCards() {
@@ -174,12 +177,46 @@ function playerStand() {
     }
 }
 
-function renderDealerCodeOnPage() {
-    createDealerDiv = document.createElement('div') 
-    addDealerDiv = document.querySelector('.main2').appendChild(createDealerDiv)
-    addDealerDiv.classList.add('card', `${lastElementInArray[0].symbol}${lastElementInArray[0].value}`, 'xlarge')
+
+// Dealer ***********************************************************************************
+
+function dealerLastCardInArray() {
+    // console.log(dealerDeckOfCards)
+    dealerLastCardInArrayyy = dealerDeckOfCards.pop()
+    // console.log(`card ${dealerLastCardInArrayyy[0].symbol}${dealerLastCardInArrayyy[0].value} xlarge`)
+    // console.log(dealerLastCardInArrayyy)
+    renderDealerCodeOnPage()
+
 }
 
+function dealerRandomDeckOfCards() {
+    let dealerCard = Math.floor(Math.random() * deckOfCards.length)
+    let removeDealerCard = deckOfCards.splice(dealerCard, 1)
+    dealerDeckOfCards.push(removeDealerCard)
+    // console.log(dealerDeckOfCards)
+    // dealerLastCardInArray()
+}
+
+
+
+function renderDealerCodeOnPage() {
+    dealerRandomDeckOfCards()
+    createDealerDiv = document.createElement('div') 
+    addDealerDiv = document.querySelector('.main2').appendChild(createDealerDiv)
+    addDealerDiv.classList.add(`card`, `${dealerLastCardInArrayyy[0].symbol}${dealerLastCardInArrayyy[0].value}`, `xlarge`)
+    // console.log(`card ${dealerLastCardInArrayyy[0].symbol}${dealerLastCardInArrayyy[0].value} xlarge`)
+    // console.log(addDealerDiv)
+}
+
+
+
+function init() {
+    makeDeck()
+    // console.log(deckOfCards)
+    randomizeDeck()
+    dealerRandomDeckOfCards()
+    // renderDealerCodeOnPage()
+}
 
 init()
 
