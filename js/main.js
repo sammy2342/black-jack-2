@@ -149,9 +149,9 @@ function displayPlayerScore() {
     let sumOfPlayerScore = addScoreForPlayer()
     playerScoreMessageEl.innerHTML = sumOfPlayerScore
     if(sumOfPlayerScore > 21){
-        // alert('you went bust')
+        alert('you went bust')
     } else if(sumOfPlayerScore === 21) {
-        // alert('You won')
+        alert('You won')
     }
 }
 
@@ -238,6 +238,16 @@ function addScoreForDealer() {
 function dealerScore() { 
     addScoreForDealer()
     dealerScoreMessageEl.innerHTML = dealerSum
+}
+
+function checkWinner() { 
+    if(dealerSum > playerSum) {
+        alert('you lost')
+    } else if(playerSum === dealerSum) {
+        alert('tie')
+    } else if(playerSum > dealerSum) {
+        alert('you won')
+    }
 }
 
 function init() {
