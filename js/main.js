@@ -20,6 +20,8 @@ let firstElementInArray
 let dealerDeckOfCards = []
 let dealerLastCardInArrayyy = []
 let valueOfDealerCard
+let newValueOfDealerCard
+let sumOfDealerScore
 
 
 
@@ -207,6 +209,7 @@ function renderDealerCodeOnPage() {
     addDealerDiv.classList.add(`card`, `${dealerLastCardInArrayyy[0].symbol}${dealerLastCardInArrayyy[0].value}`, `xlarge`)
     // console.log(`card ${dealerLastCardInArrayyy[0].symbol}${dealerLastCardInArrayyy[0].value} xlarge`)
     // console.log(addDealerDiv)
+    dealerScore()
 }
 
 function dealerCardValue() {
@@ -223,12 +226,28 @@ function dealerCardValue() {
     return parseInt(valueOfDealerCard) 
 }
 
+dealerSum = 0
+function addScoreForDealer() { 
+    // dealerScore()
+    newValueOfDealerCard = dealerCardValue()
+    dealerSum += parseInt(newValueOfDealerCard)
+    console.log(newValueOfDealerCard)
+    return dealerSum
+}
+
+function dealerScore() { 
+    addScoreForDealer()
+    dealerScoreMessageEl.innerHTML = dealerSum
+}
+
 function init() {
     makeDeck()
     // console.log(deckOfCards)
     randomizeDeck()
     dealerRandomDeckOfCards()
-    // renderDealerCodeOnPage()
+    // addScoreForDealer()
+    // dealerScore()
+
 }
 
 init()
