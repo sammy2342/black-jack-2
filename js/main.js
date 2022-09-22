@@ -191,7 +191,10 @@ function addDealerCardtoPage() {
     
 }
 
-
+function checkWinner() {
+    let checkPlayerSum = calculatePlayerScore()
+    let checkDealerSum = calculateDealerScore()
+}
 
 
 
@@ -327,15 +330,15 @@ function dealerScore() {
     // checkWinner()
 }
 
-function checkWinner() { 
-    if(dealerSum > playerSum) {
-        alert('you lost dealer won')
-    } else if(playerSum === dealerSum) {
-        alert('tie')
-    } else if(playerSum > dealerSum) {
-        alert('you won ;;')
-    }
-}
+// function checkWinner() { 
+//     if(dealerSum > playerSum) {
+//         alert('you lost dealer won')
+//     } else if(playerSum === dealerSum) {
+//         alert('tie')
+//     } else if(playerSum > dealerSum) {
+//         alert('you won ;;')
+//     }
+// }
 
 function resetBtn() {
 }
