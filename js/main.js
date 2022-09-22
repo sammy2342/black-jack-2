@@ -5,10 +5,8 @@ const arrSymbol = ['h', 's', 'c', 'd']
 
 
 /*----- app's state (variables) -----*/ 
-let deckOfCards = []
-let newDeck = []
-let playerHand = []
-let dealerHand = []
+let deckOfCards, newDeck, playerHand, dealerHand
+
 
 
 
@@ -33,7 +31,7 @@ const playerEl = document.querySelector('main')
 
 const dealerEl = document.querySelector('.main2')
 
-
+removeBackCardEl = document.getElementById('flip-card')
 
 /*----- event listeners -----*/ 
 
@@ -54,12 +52,6 @@ function makeDeck() {
             cardValue = {value: arrNum[j], symbol: arrSymbol[i]}
             deckOfCards.push(cardValue)
             // Not sure if the if statement works
-            if(arrNum[j] === 'K' && arrNum[j] === 'Q' && arrNum[j] === 'J') {
-                valueOfUniqueCards = 10
-            }
-            if(arrNum[j] === 'A') {
-                valueOfUniqueCards = 11
-            }
         }
     }
 }
@@ -84,6 +76,7 @@ function dealCards() {
     for(let i = 0; i < 1; i++) {
         dealerHand.push(newDeck.pop())
     }
+    console.log(dealerHand)
 }
 
 // render *******************************************************************************
@@ -91,9 +84,6 @@ function dealCards() {
 function render() {
     renderPlayerHand()
     renderDealerHand()
-    checkWinner()
-    calculatePlayerScore()
-    calculateDealerScore()
     displayPlayerScore()
     displayDealerHand()
     // addDealerCardtoPage()
@@ -103,20 +93,22 @@ function renderPlayerHand() {
     // first im going to loop through the player hand 
     // forEach card in th player hand create a div and give it the proper classes 
     // after creating the div append them to the dom 
+    document.getElementById('players-card').innerHTML = ''
     playerHand.forEach(card => {
-        console.log(card)
+        // console.log(card)
         let newPlayerHandDiv = document.createElement('div')
         newPlayerHandDiv.classList.add(`card`,`${card.symbol}${card.value}`,'xlarge')
-        document.querySelector('main').appendChild(newPlayerHandDiv)
+        document.getElementById('players-card').appendChild(newPlayerHandDiv)
     })
 }
 
 function renderDealerHand() {
+    document.getElementById('dealers-card').innerHTML = ''
     dealerHand.forEach(card => {
-        console.log(card)
+        // console.log(card)
         let newDealerHandDiv = document.createElement('div')
         newDealerHandDiv.classList.add(`card`,`${card.symbol}${card.value}`,'xlarge')
-        document.querySelector('.main2').appendChild(newDealerHandDiv)
+        document.getElementById('dealers-card').appendChild(newDealerHandDiv)
     })
 }
 
@@ -125,11 +117,9 @@ function playerHitBtn() {
     if(playerSumOfCards < 21) {
     let newCard = newDeck.pop()
     playerHand.push(newCard)
-    let newPlayerCardDiv = document.createElement('div')
-    newPlayerCardDiv.classList.add(`card`, `${newCard.symbol}${newCard.value}`, `xlarge`)
-    document.querySelector('main').appendChild(newPlayerCardDiv)
     displayPlayerScore()
     checkWinner()
+    render()
     }
 }
 
@@ -137,14 +127,15 @@ function calculatePlayerScore() {
     let playerScore = 0
     for(let i = 0; i < playerHand.length; i++) {
         if(playerHand[i].value === 'Q' || playerHand[i].value === 'J' || playerHand[i].value === 'K') {
-            playerHand[i].value = '10'
+            playerScore += 10
         }else if(playerHand[i].value === 'A' && playerScore < 11) {
-            playerHand[i].value = '11'
+            playerScore += 11
         } else if(playerHand[i].value === 'A' && playerScore >= 11) {
-            playerHand[i].value = '1'
+            playerScore += 1
+        } else {
+            playerScore += parseInt(playerHand[i].value)
         }
-        playerScore += parseInt(playerHand[i].value)
-        console.log(playerScore)
+        // console.log(playerScore)
     }
     return playerScore
 }
@@ -182,14 +173,11 @@ function addDealerCardtoPage() {
     while(sumOfDealerScore < 17) {
         let newDealerCard = newDeck.pop()
         dealerHand.push(newDealerCard)
-        console.log(dealerHand)
-        let newDealerCardDiv = document.createElement('div')
-        newDealerCardDiv.classList.add(`card`, `${newDealerCard.symbol}${newDealerCard.value}`, `xlarge`)
-        document.querySelector('.main2').appendChild(newDealerCardDiv)
+        // console.log(dealerHand)
         sumOfDealerScore = calculateDealerScore()
-        console.log(sumOfDealerScore)
+        // console.log(sumOfDealerScore)
     }
-    displayDealerHand()
+    render()
     
 }
 
@@ -197,8 +185,8 @@ function addDealerCardtoPage() {
 function checkWinner() {
     let checkPlayerSum = calculatePlayerScore()
     let checkDealerSum = calculateDealerScore()
-    console.log(checkPlayerSum)
-    console.log(checkDealerSum)
+    // console.log(checkPlayerSum)
+    // console.log(checkDealerSum)
     if(checkPlayerSum > 21) {
         displayWinnerEl.innerHTML = 'You went Bust'
     } else if(checkPlayerSum === 21) {
@@ -227,24 +215,27 @@ function checkWinnerStand() {
 function playerStand() { 
     addDealerCardtoPage()
     checkWinnerStand()
+    removeBackCardEl.remove()
 }
 
 
 function init() {
+    deckOfCards = []
+    playerHand = []
+    dealerHand = []
+    newDeck = []
+    console.log(dealerHand)
     makeDeck()
     randomizeDeck()
     dealCards()
+    checkWinner()
+    calculatePlayerScore()
+    calculateDealerScore()
     render()
 }
 init()
 
 
 function resetBtn() {
-    deckOfCards = []
-    playerHand = []
-    dealerHand = []
-    newDeck = []
-    playerEl.removeChild(cardEl)
-    dealerEl.removeChild(cardEl)    
     init()
 }

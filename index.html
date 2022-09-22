@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script defer src="./js/main.js"></script>
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="/css/card-deck-css/css/cardstarter.css">
-    <link rel="stylesheet" href="/css/card-deck-css/css/cardstarter.min.css">
-    <link rel="stylesheet" href="./card-deck-css/images/">
+    <link rel="stylesheet" href="css/card-deck-css/css/cardstarter.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script defer src="js/main.js"></script>
     <title>blackjack</title>
 </head>
 <body>
@@ -37,7 +35,7 @@
                 <h1>SCORE:<div id="player-score"></div></h1>
             </div>
         </div>
-        
+        <div id="players-card"></div>
     </main>
 
     <main class="main2">
@@ -47,7 +45,8 @@
                 <h1>SCORE:<div id="dealer-score"></div></h1>
             </div>
         </div>
-        <div class="card back xlarge"></div>
+        <div class="card back xlarge" id="flip-card"></div>
+        <div id="dealers-card"></div>
     </main>
 
     <section class="button-section">
