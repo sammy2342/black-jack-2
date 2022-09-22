@@ -97,7 +97,9 @@ function render() {
     renderPlayerHand()
     renderDealerHand()
     calculatePlayerScore()
+    calculateDealerScore()
     displayPlayerScore()
+    displayDealerHand()
 }
 
 function renderPlayerHand() {
@@ -164,10 +166,11 @@ function calculateDealerScore() {
     return dealerScore
 }
 
-// function renderDealerHand() {
-//     let renderDealerScre = calculateDealerScore()
-//     dealerScoreMessageEl.innerHTML = renderDealerScre
-// } 
+function displayDealerHand() {
+    let renderDealerScre = calculateDealerScore()
+    dealerScoreMessageEl.innerHTML = renderDealerScre
+} 
+
 
 
 function valueOfCards() {
