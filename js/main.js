@@ -100,6 +100,7 @@ function render() {
     calculateDealerScore()
     displayPlayerScore()
     displayDealerHand()
+    addDealerCardtoPage()
 }
 
 function renderPlayerHand() {
@@ -161,7 +162,7 @@ function calculateDealerScore() {
             dealerHand[i].value = '11'
         }
         dealerScore += parseInt(dealerHand[i].value)
-        console.log(dealerScore)
+        // console.log(dealerScore)
     }
     return dealerScore
 }
@@ -170,6 +171,24 @@ function displayDealerHand() {
     let renderDealerScre = calculateDealerScore()
     dealerScoreMessageEl.innerHTML = renderDealerScre
 } 
+
+function addDealerCardtoPage() {
+    let sumOfDealerScore = calculateDealerScore()
+    while(sumOfDealerScore < 17) {
+        let newDealerCard = newDeck.pop()
+        dealerHand.push(newDealerCard)
+        console.log(dealerHand)
+        let newDealerCardDiv = document.createElement('div')
+        newDealerCardDiv.classList.add(`card`, `${newDealerCard.symbol}${newDealerCard.value}`, `xlarge`)
+        document.querySelector('.main2').appendChild(newDealerCardDiv)
+        sumOfDealerScore = calculateDealerScore()
+        console.log(sumOfDealerScore)
+    }
+    displayDealerHand()
+    
+}
+
+
 
 
 
