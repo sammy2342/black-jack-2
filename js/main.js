@@ -96,6 +96,8 @@ function dealCards() {
 function render() {
     renderPlayerHand()
     renderDealerHand()
+    calculatePlayerScore()
+    displayPlayerScore()
 }
 
 function renderPlayerHand() {
@@ -142,14 +144,30 @@ function calculatePlayerScore() {
     return playerScore
 }
 
-
-
 function displayPlayerScore() {
     let renderPlayerScore = calculatePlayerScore()
     playerScoreMessageEl.innerHTML = renderPlayerScore
 }
 
-dealer
+
+function calculateDealerScore() {
+    let dealerScore = 0
+    for(let i = 0; i < dealerHand.length; i++) {
+        if(dealerHand[i].value === 'Q' || dealerHand[i].value === 'J' || dealerHand[i].value === 'K') {
+            dealerHand[i].value = '10'
+        }else if(dealerHand[i].value === 'A') {
+            dealerHand[i].value = '11'
+        }
+        dealerScore += parseInt(dealerHand[i].value)
+        console.log(dealerScore)
+    }
+    return dealerScore
+}
+
+// function renderDealerHand() {
+//     let renderDealerScre = calculateDealerScore()
+//     dealerScoreMessageEl.innerHTML = renderDealerScre
+// } 
 
 
 function valueOfCards() {
