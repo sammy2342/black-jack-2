@@ -125,23 +125,31 @@ function playerHitBtn() {
     let newPlayerCardDiv = document.createElement('div')
     newPlayerCardDiv.classList.add(`card`, `${newCard.symbol}${newCard.value}`, `xlarge`)
     document.querySelector('main').appendChild(newPlayerCardDiv)
+    displayPlayerScore()
 }
 
-let playerScore = 0
 function calculatePlayerScore() {
+    let playerScore = 0
     for(let i = 0; i < playerHand.length; i++) {
         if(playerHand[i].value === 'Q' || playerHand[i].value === 'J' || playerHand[i].value === 'K') {
             playerHand[i].value = '10'
         }else if(playerHand[i].value === 'A') {
-            playerHand[i].value === '11'
+            playerHand[i].value = '11'
         }
-        return playerScore += parseInt(playerHand[i].value)
-        
+        playerScore += parseInt(playerHand[i].value)
+        console.log(playerScore)
     }
-    console.log(playerScore)
+    return playerScore
 }
 
 
+
+function displayPlayerScore() {
+    let renderPlayerScore = calculatePlayerScore()
+    playerScoreMessageEl.innerHTML = renderPlayerScore
+}
+
+dealer
 
 
 function valueOfCards() {
@@ -171,16 +179,16 @@ function addScoreForPlayer() {
     // checkAce()
 }
 
-function displayPlayerScore() {
-    let sumOfPlayerScore = addScoreForPlayer()
-    playerScoreMessageEl.innerHTML = sumOfPlayerScore
-    // playerStand()
-    if(sumOfPlayerScore > 21){
-        alert('you went bust')
-    } else if(sumOfPlayerScore === 21) {
-        alert('You won')
-    }
-}
+// function displayPlayerScore() {
+//     let sumOfPlayerScore = addScoreForPlayer()
+//     playerScoreMessageEl.innerHTML = sumOfPlayerScore
+//     // playerStand()
+//     if(sumOfPlayerScore > 21){
+//         alert('you went bust')
+//     } else if(sumOfPlayerScore === 21) {
+//         alert('You won')
+//     }
+// }
 
 // still have to figure this out 
 function checkAce() {
