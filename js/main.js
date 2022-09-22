@@ -138,8 +138,10 @@ function calculatePlayerScore() {
     for(let i = 0; i < playerHand.length; i++) {
         if(playerHand[i].value === 'Q' || playerHand[i].value === 'J' || playerHand[i].value === 'K') {
             playerHand[i].value = '10'
-        }else if(playerHand[i].value === 'A') {
+        }else if(playerHand[i].value === 'A' && playerScore < 11) {
             playerHand[i].value = '11'
+        } else if(playerHand[i].value === 'A' && playerScore >= 11) {
+            playerHand[i].value = '1'
         }
         playerScore += parseInt(playerHand[i].value)
         console.log(playerScore)
@@ -158,8 +160,10 @@ function calculateDealerScore() {
     for(let i = 0; i < dealerHand.length; i++) {
         if(dealerHand[i].value === 'Q' || dealerHand[i].value === 'J' || dealerHand[i].value === 'K') {
             dealerHand[i].value = '10'
-        }else if(dealerHand[i].value === 'A') {
+        }else if(dealerHand[i].value === 'A' && dealerScore < 11) {
             dealerHand[i].value = '11'
+        } else if(dealerHand[i].value === 'A' && dealerScore > 11) {
+            dealerHand[i].value = '1'
         }
         dealerScore += parseInt(dealerHand[i].value)
         // console.log(dealerScore)
@@ -219,9 +223,6 @@ function checkWinnerStand() {
 }
 
 // use this function to check if a player hand is 21
-function checkAce() {
-
-}
 
 function playerStand() { 
     addDealerCardtoPage()
