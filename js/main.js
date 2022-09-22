@@ -27,6 +27,13 @@ resetBtnEl = document.getElementById('reset')
 
 displayWinnerEl = document.querySelector('.display-winner')
 
+const cardEl = document.querySelector('.card')
+
+const playerEl = document.querySelector('main')
+
+const dealerEl = document.querySelector('.main2')
+
+
 
 /*----- event listeners -----*/ 
 
@@ -69,11 +76,12 @@ function randomizeDeck() {
 }
 
 // we want to add this information in a class so it displays on the page 
+// changed dealer hand to 1
 function dealCards() {
     for(let i = 0; i < 2; i++) {
         playerHand.push(newDeck.pop())
     }
-    for(let i = 0; i < 2; i++) {
+    for(let i = 0; i < 1; i++) {
         dealerHand.push(newDeck.pop())
     }
 }
@@ -235,6 +243,7 @@ function resetBtn() {
     playerHand = []
     dealerHand = []
     newDeck = []
+    playerEl.removeChild(cardEl)
+    dealerEl.removeChild(cardEl)    
     init()
-
 }
