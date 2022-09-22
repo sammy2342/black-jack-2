@@ -25,7 +25,7 @@ dealerTotalScoreMessageEl = document.getElementById('dealer-total-score')
 
 resetBtnEl = document.getElementById('reset')
 
-
+displayWinnerEl = document.querySelector('.display-winner')
 
 
 /*----- event listeners -----*/ 
@@ -96,11 +96,12 @@ function dealCards() {
 function render() {
     renderPlayerHand()
     renderDealerHand()
+    checkWinner()
     calculatePlayerScore()
     calculateDealerScore()
     displayPlayerScore()
     displayDealerHand()
-    addDealerCardtoPage()
+    // addDealerCardtoPage()
 }
 
 function renderPlayerHand() {
@@ -133,6 +134,7 @@ function playerHitBtn() {
     newPlayerCardDiv.classList.add(`card`, `${newCard.symbol}${newCard.value}`, `xlarge`)
     document.querySelector('main').appendChild(newPlayerCardDiv)
     displayPlayerScore()
+    checkWinner()
     }
 }
 
@@ -175,6 +177,7 @@ function displayDealerHand() {
     dealerScoreMessageEl.innerHTML = renderDealerScre
 } 
 
+// invoke when player clicks on stand
 function addDealerCardtoPage() {
     let sumOfDealerScore = calculateDealerScore()
     while(sumOfDealerScore < 17) {
@@ -191,40 +194,80 @@ function addDealerCardtoPage() {
     
 }
 
+
 function checkWinner() {
     let checkPlayerSum = calculatePlayerScore()
     let checkDealerSum = calculateDealerScore()
-}
-
-
-
-
-function valueOfCards() {
-    // console.log(lastElementInArray, 'is this working')
-    valueOfTheCard = lastElementInArray[0].value
-    if(valueOfTheCard === 'J' || valueOfTheCard === 'Q' || valueOfTheCard === 'K') {
-        valueOfTheCard = 10
-        valueOfTheCard = parseInt(valueOfTheCard)
-    } 
-    if(valueOfTheCard === 'A') {
-        valueOfTheCard = 11 
-        checkAce()
+    console.log(checkPlayerSum)
+    console.log(checkDealerSum)
+    if(checkPlayerSum > 21) {
+        displayWinnerEl.innerHTML = 'You went Bust'
+    } else if(checkPlayerSum === 21) {
+        displayWinnerEl.innerHTML = 'Black Jack'
     }
-    currentValue = parseInt(valueOfTheCard)
-    // console.log(currentValue)
+}
+
+function checkWinnerStand() {
+    let checkPlayerSum = calculatePlayerScore()
+    let checkDealerSum = calculateDealerScore()
+    console.log(checkDealerSum)
+    console.log(checkPlayerSum)
+    if(checkPlayerSum > checkDealerSum && checkPlayerSum <= 21) {
+        displayWinnerEl.innerHTML = 'You Won'
+    } else if(checkDealerSum > checkPlayerSum && checkDealerSum <= 21) {
+        displayWinnerEl.innerHTML = 'You Lost'
+    } else if(checkDealerSum === checkPlayerSum && checkDealerSum <= 21) {
+        displayWinnerEl.innerHTML = 'You tied'
+    } else if(checkDealerSum > 21) {
+        displayWinnerEl.innerHTML = 'Dealer went bust'
+    }
+}
+
+// use this function to check if a player hand is 21
+
+function playerStand() { 
+    addDealerCardtoPage()
+    checkWinnerStand()
+
+}
+
+function resetBtn() {
+
+}
+
+
+
+
+
+
+
+
+// function valueOfCards() {
+//     // console.log(lastElementInArray, 'is this working')
+//     valueOfTheCard = lastElementInArray[0].value
+//     if(valueOfTheCard === 'J' || valueOfTheCard === 'Q' || valueOfTheCard === 'K') {
+//         valueOfTheCard = 10
+//         valueOfTheCard = parseInt(valueOfTheCard)
+//     } 
+//     if(valueOfTheCard === 'A') {
+//         valueOfTheCard = 11 
+//         checkAce()
+//     }
+//     currentValue = parseInt(valueOfTheCard)
+//     // console.log(currentValue)
     
-    return currentValue
-    // console.log(currentValue)
-}
+//     return currentValue
+//     // console.log(currentValue)
+// }
 
 
-let playerSum = 0
-function addScoreForPlayer() {
-    let valueOfPlayerCard = valueOfCards()
-    playerSum = playerSum + valueOfPlayerCard
-    return playerSum
-    // checkAce()
-}
+// let playerSum = 0
+// function addScoreForPlayer() {
+//     let valueOfPlayerCard = valueOfCards()
+//     playerSum = playerSum + valueOfPlayerCard
+//     return playerSum
+//     // checkAce()
+// }
 
 // function displayPlayerScore() {
 //     let sumOfPlayerScore = addScoreForPlayer()
@@ -238,41 +281,33 @@ function addScoreForPlayer() {
 // }
 
 // still have to figure this out 
-function checkAce() {
-    // valueOfCards()
-    // addScoreForPlayer()
+// function checkAce() {
+//     // valueOfCards()
+//     // addScoreForPlayer()
 
-    // console.log(playerSum)
-    // console.log(currentValue)
-    // console.log(valueOfTheCard)
-    if(valueOfTheCard === 11 && playerSum <= 10) {
-        valueOfTheCard = 11
-    } else if(valueOfTheCard === 11 && playerSum >= 11) {
-        valueOfTheCard = 1
-    }
-}
+//     // console.log(playerSum)
+//     // console.log(currentValue)
+//     // console.log(valueOfTheCard)
+//     if(valueOfTheCard === 11 && playerSum <= 10) {
+//         valueOfTheCard = 11
+//     } else if(valueOfTheCard === 11 && playerSum >= 11) {
+//         valueOfTheCard = 1
+//     }
+// }
 
-function playerStand() { 
-    if(playerSum > dealerSum) {
-        alert('you won')
-    } else if(playerSum === dealerSum) {
-        alert('Tied')
-    } else if(dealerSum > playerSum) {
-        alert('you Lost')
-    }
-}
+
 
 
 // Dealer ***********************************************************************************
 
-function dealerLastCardInArray() {
-    // console.log(dealerDeckOfCards)
-    dealerLastCardInArrayyy = dealerDeckOfCards.pop()
-    // console.log(`card ${dealerLastCardInArrayyy[0].symbol}${dealerLastCardInArrayyy[0].value} xlarge`)
-    // console.log(dealerLastCardInArrayyy)
-    renderDealerCodeOnPage()
+// function dealerLastCardInArray() {
+//     // console.log(dealerDeckOfCards)
+//     dealerLastCardInArrayyy = dealerDeckOfCards.pop()
+//     // console.log(`card ${dealerLastCardInArrayyy[0].symbol}${dealerLastCardInArrayyy[0].value} xlarge`)
+//     // console.log(dealerLastCardInArrayyy)
+//     renderDealerCodeOnPage()
 
-}
+// }
 
 function dealerRandomDeckOfCards() {
     let dealerCard = Math.floor(Math.random() * deckOfCards.length)
@@ -340,8 +375,6 @@ function dealerScore() {
 //     }
 // }
 
-function resetBtn() {
-}
 
 function init() {
     makeDeck()

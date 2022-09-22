@@ -189,3 +189,13 @@ main {
 }
 
 /* button id end */
+.display { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.display-winner {
+    color: rgba(250, 242, 238, 0.886);
+}
