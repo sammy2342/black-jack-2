@@ -9,7 +9,6 @@ let deckOfCards, newDeck, playerHand, dealerHand
 
 
 
-
 /*----- cached element references -----*/ 
 hitBtnEl = document.getElementById('hit')
 
@@ -193,6 +192,7 @@ function checkWinner() {
         displayWinnerEl.innerHTML = 'Black Jack'
     }
 }
+
 
 function checkWinnerStand() {
     let checkPlayerSum = calculatePlayerScore()
