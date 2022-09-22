@@ -40,19 +40,6 @@ resetBtnEl.addEventListener('click', resetBtn)
 
 /*----- functions -----*/
 
-// this function is to make the deck of 52 cards 
-// First thing we loop through every symbol 
-// and then inside of the first loop we loop another for every symbol we loop through the numbers
-// and then we put it inside an object with value and symbol 
-// and then we set deck of card to empty array and we push it inside of it
-// function init() {
-//     makeDeck()
-//     // console.log(deckOfCards)
-//     randomizeDeck()
-//     dealerRandomDeckOfCards()
-//     renderDealerCodeOnPage()
-// }
-
 // Intilize deck ***********************************************************************************
 function makeDeck() {
     for(let i = 0; i < arrSymbol.length; i++) {
@@ -224,156 +211,14 @@ function checkWinnerStand() {
 }
 
 // use this function to check if a player hand is 21
+function checkAce() {
+
+}
 
 function playerStand() { 
     addDealerCardtoPage()
     checkWinnerStand()
-
 }
-
-function resetBtn() {
-
-}
-
-
-
-
-
-
-
-
-// function valueOfCards() {
-//     // console.log(lastElementInArray, 'is this working')
-//     valueOfTheCard = lastElementInArray[0].value
-//     if(valueOfTheCard === 'J' || valueOfTheCard === 'Q' || valueOfTheCard === 'K') {
-//         valueOfTheCard = 10
-//         valueOfTheCard = parseInt(valueOfTheCard)
-//     } 
-//     if(valueOfTheCard === 'A') {
-//         valueOfTheCard = 11 
-//         checkAce()
-//     }
-//     currentValue = parseInt(valueOfTheCard)
-//     // console.log(currentValue)
-    
-//     return currentValue
-//     // console.log(currentValue)
-// }
-
-
-// let playerSum = 0
-// function addScoreForPlayer() {
-//     let valueOfPlayerCard = valueOfCards()
-//     playerSum = playerSum + valueOfPlayerCard
-//     return playerSum
-//     // checkAce()
-// }
-
-// function displayPlayerScore() {
-//     let sumOfPlayerScore = addScoreForPlayer()
-//     playerScoreMessageEl.innerHTML = sumOfPlayerScore
-//     // playerStand()
-//     if(sumOfPlayerScore > 21){
-//         alert('you went bust')
-//     } else if(sumOfPlayerScore === 21) {
-//         alert('You won')
-//     }
-// }
-
-// still have to figure this out 
-// function checkAce() {
-//     // valueOfCards()
-//     // addScoreForPlayer()
-
-//     // console.log(playerSum)
-//     // console.log(currentValue)
-//     // console.log(valueOfTheCard)
-//     if(valueOfTheCard === 11 && playerSum <= 10) {
-//         valueOfTheCard = 11
-//     } else if(valueOfTheCard === 11 && playerSum >= 11) {
-//         valueOfTheCard = 1
-//     }
-// }
-
-
-
-
-// Dealer ***********************************************************************************
-
-// function dealerLastCardInArray() {
-//     // console.log(dealerDeckOfCards)
-//     dealerLastCardInArrayyy = dealerDeckOfCards.pop()
-//     // console.log(`card ${dealerLastCardInArrayyy[0].symbol}${dealerLastCardInArrayyy[0].value} xlarge`)
-//     // console.log(dealerLastCardInArrayyy)
-//     renderDealerCodeOnPage()
-
-// }
-
-function dealerRandomDeckOfCards() {
-    let dealerCard = Math.floor(Math.random() * deckOfCards.length)
-    let removeDealerCard = deckOfCards.splice(dealerCard, 1)
-    dealerDeckOfCards.push(removeDealerCard)
-    // console.log(dealerDeckOfCards)
-    // dealerLastCardInArray()
-}
-
-
-
-function renderDealerCodeOnPage() {
-    dealerRandomDeckOfCards()
-    createDealerDiv = document.createElement('div') 
-    addDealerDiv = document.querySelector('.main2').appendChild(createDealerDiv)
-    addDealerDiv.classList.add(`card`, `${dealerLastCardInArrayyy[0].symbol}${dealerLastCardInArrayyy[0].value}`, `xlarge`)
-    // console.log(`card ${dealerLastCardInArrayyy[0].symbol}${dealerLastCardInArrayyy[0].value} xlarge`)
-    // console.log(addDealerDiv)
-    dealerScore()
-}
-
-function test() {
-    while(dealerSum < 17) {
-        renderDealerCodeOnPage()
-    }
-}
-
-
-function dealerCardValue() {
-    valueOfDealerCard = dealerLastCardInArrayyy[0].value
-    // console.log(isNaN(valueOfDealerCard))
-    if(isNaN(valueOfDealerCard)) { 
-        if(valueOfDealerCard === 'A') {
-            return 11
-        } else {
-            return 10
-        }
-        
-    }
-    return parseInt(valueOfDealerCard) 
-}
-
-dealerSum = 0
-function addScoreForDealer() { 
-    // dealerScore()
-    newValueOfDealerCard = dealerCardValue()
-    dealerSum += parseInt(newValueOfDealerCard)
-    console.log(newValueOfDealerCard)
-    return dealerSum
-}
-
-function dealerScore() { 
-    addScoreForDealer()
-    dealerScoreMessageEl.innerHTML = dealerSum
-    // checkWinner()
-}
-
-// function checkWinner() { 
-//     if(dealerSum > playerSum) {
-//         alert('you lost dealer won')
-//     } else if(playerSum === dealerSum) {
-//         alert('tie')
-//     } else if(playerSum > dealerSum) {
-//         alert('you won ;;')
-//     }
-// }
 
 
 function init() {
@@ -385,3 +230,11 @@ function init() {
 init()
 
 
+function resetBtn() {
+    deckOfCards = []
+    playerHand = []
+    dealerHand = []
+    newDeck = []
+    init()
+
+}
