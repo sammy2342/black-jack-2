@@ -125,12 +125,15 @@ function renderDealerHand() {
 }
 
 function playerHitBtn() {
+    let playerSumOfCards = calculatePlayerScore()
+    if(playerSumOfCards < 21) {
     let newCard = newDeck.pop()
     playerHand.push(newCard)
     let newPlayerCardDiv = document.createElement('div')
     newPlayerCardDiv.classList.add(`card`, `${newCard.symbol}${newCard.value}`, `xlarge`)
     document.querySelector('main').appendChild(newPlayerCardDiv)
     displayPlayerScore()
+    }
 }
 
 function calculatePlayerScore() {
@@ -187,6 +190,7 @@ function addDealerCardtoPage() {
     displayDealerHand()
     
 }
+
 
 
 
