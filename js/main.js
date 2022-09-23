@@ -30,7 +30,7 @@ const playerEl = document.querySelector('main')
 
 const dealerEl = document.querySelector('.main2')
 
-removeBackCardEl = document.getElementById('flip-card')
+removeBackCardEl = document.querySelector('.back')
 
 /*----- event listeners -----*/ 
 
@@ -103,6 +103,7 @@ function renderPlayerHand() {
 
 function renderDealerHand() {
     document.getElementById('dealers-card').innerHTML = ''
+    console.log(dealerHand, 'okkkk')
     dealerHand.forEach(card => {
         // console.log(card)
         let newDealerHandDiv = document.createElement('div')
@@ -218,6 +219,7 @@ function checkWinnerStand() {
 function playerStand() { 
     addDealerCardtoPage()
     checkWinnerStand()
+    removeBackCardEl = document.querySelector('.back')
     removeBackCardEl.remove()
 }
 
@@ -240,6 +242,15 @@ init()
 
 
 function resetBtn() {
+    removeBackCardEl = document.querySelector('.back')
+    if(removeBackCardEl){
+        removeBackCardEl.remove()
+
+    }
     init()
     displayWinnerEl.innerHTML = ''
+    let addBackOfCard = document.createElement('div')
+    console.log(addBackOfCard)
+    addBackOfCard.classList.add(`card`, `back`, `xlarge`)
+    document.querySelector('.main2').appendChild(addBackOfCard)
 }
