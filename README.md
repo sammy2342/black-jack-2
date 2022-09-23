@@ -4,4 +4,11 @@
 
 Link for my game https://sammy2342.github.io/black-jack-2/
 
-* hi
+* Players draw cards trying to get a total of 21
+* Whoever is closest to 21 with going over is the winner
+
+#Technologies Used 
+
+*Javascript
+*Html
+*Css 
