@@ -149,13 +149,16 @@ function calculateDealerScore() {
     let dealerScore = 0
     for(let i = 0; i < dealerHand.length; i++) {
         if(dealerHand[i].value === 'Q' || dealerHand[i].value === 'J' || dealerHand[i].value === 'K') {
-            dealerHand[i].value = '10'
+            // dealerHand[i].value = '10'
+            dealerScore += 10
         }else if(dealerHand[i].value === 'A' && dealerScore < 11) {
-            dealerHand[i].value = '11'
+            // dealerHand[i].value = '11'
+            dealerScore += 11
         } else if(dealerHand[i].value === 'A' && dealerScore > 11) {
-            dealerHand[i].value = '1'
+            dealerScore += 1
+        } else {
+            dealerScore += parseInt(dealerHand[i].value)
         }
-        dealerScore += parseInt(dealerHand[i].value)
         // console.log(dealerScore)
     }
     return dealerScore
@@ -238,4 +241,5 @@ init()
 
 function resetBtn() {
     init()
+    displayWinnerEl.innerHTML = ''
 }
